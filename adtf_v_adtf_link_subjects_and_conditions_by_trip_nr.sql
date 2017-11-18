@@ -1,0 +1,14 @@
+DROP VIEW IF EXISTS v_adtf_link_subjects_and_conditions_by_trip_nr CASCADE;
+CREATE VIEW v_adtf_link_subjects_and_conditions_by_trip_nr AS
+
+SELECT
+public.t_link_subjects_and_conditions.subject_id,
+public.t_link_subjects_and_conditions.condition_code,
+public.t_q_conditions_by_trip_nr.condition_id,
+public.t_q_conditions_by_trip_nr.trip_nr_ts,
+public.t_q_conditions_by_trip_nr.trip_nr_tc,
+public.t_q_conditions_by_trip_nr.trip_nr_gs,
+public.t_q_conditions_by_trip_nr.trip_nr_gc
+FROM
+public.t_q_conditions_by_trip_nr
+INNER JOIN public.t_link_subjects_and_conditions ON public.t_link_subjects_and_conditions.condition_code = public.t_q_conditions_by_trip_nr.condition_code
