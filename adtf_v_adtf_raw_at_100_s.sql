@@ -12,4 +12,4 @@ t_adtf_raw
 LEFT JOIN t_adtf_file_assignment ON t_adtf_raw.file_name = t_adtf_file_assignment.file_name
 
 WHERE
-row_nr = 1000
+row_nr = 1

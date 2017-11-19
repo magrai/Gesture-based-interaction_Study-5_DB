@@ -1,0 +1,14 @@
+SELECT
+public.t_adtf_file_assignment.file_name,
+public.t_adtf_file_assignment.file_size,
+public.t_adtf_file_assignment.subject_id,
+public.t_adtf_file_assignment.trip_nr,
+public.t_adtf_trip_identification.trip_nr_clarified_v2,
+public.t_adtf_file_assignment.note,
+public.t_adtf_file_assignment.protocol
+FROM
+public.t_adtf_file_assignment
+LEFT JOIN public.t_adtf_trip_identification ON public.t_adtf_trip_identification.file_name = public.t_adtf_file_assignment.file_name
+
+ORDER BY
+public.t_adtf_file_assignment.file_name ASC
