@@ -1,5 +1,5 @@
-DROP VIEW IF EXISTS t_adtf_raw_every_100th_row CASCADE;
-CREATE VIEW t_adtf_raw_every_100th_row AS
+DROP VIEW IF EXISTS v_adtf_raw_every_100th_row CASCADE;
+CREATE VIEW v_adtf_raw_every_100th_row AS
 
 SELECT
 t_adtf_raw.file_name,
