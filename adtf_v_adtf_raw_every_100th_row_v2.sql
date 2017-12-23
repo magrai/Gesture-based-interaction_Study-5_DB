@@ -13,8 +13,8 @@ FROM
 	t_100th_row.gps_lon,
 	t_100th_row.gps_lat,
 	t_100th_row.speed_kmh,
-	(f_conv_gps2xy_byWHOI(t_100th_row.gps_lon::numeric, t_100th_row.gps_lat::numeric, t_gps_reference_coordinates.gps_lon, t_gps_reference_coordinates.gps_lat, -1.85)).pos_x,
-	(f_conv_gps2xy_byWHOI(t_100th_row.gps_lon::numeric, t_100th_row.gps_lat::numeric, t_gps_reference_coordinates.gps_lon, t_gps_reference_coordinates.gps_lat, -1.85)).pos_y
+	(f_conv_gps2xy_byWHOI(t_100th_row.gps_lon::numeric, t_100th_row.gps_lat::numeric, t_coordinates_gps_reference.gps_lon, t_coordinates_gps_reference.gps_lat, -1.85)).pos_x,
+	(f_conv_gps2xy_byWHOI(t_100th_row.gps_lon::numeric, t_100th_row.gps_lat::numeric, t_coordinates_gps_reference.gps_lon, t_coordinates_gps_reference.gps_lat, -1.85)).pos_y
 
 	FROM (
 		SELECT
@@ -28,11 +28,13 @@ FROM
 		FROM
 		t_adtf_raw
 
-		WHERE row_nr % 100 = 0
+		WHERE 
+		row_nr = 1 OR
+		row_nr % 100 = 0
 
 		GROUP BY
 		t_adtf_raw.file_name,
 		ROUND(t_adtf_raw."Time"::NUMERIC, 1)
 	) t_100th_row,
-	t_gps_reference_coordinates
+	t_coordinates_gps_reference
 ) temp
